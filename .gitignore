@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/defi-staking-app-starter-main/defi-staking-app-starter/node_modules
-./defi-staking-app-starter-main.zip
+defi-staking-app-starter-main.zip
+Defi-Staking-App-master.zip
 
 /.pnp
 .pnp.js
