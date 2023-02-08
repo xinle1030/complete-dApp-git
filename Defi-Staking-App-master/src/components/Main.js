@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import tether from "../tether.png";
+import Airdrop from "./Airdrop";
 
 class Main extends Component {
   //our React Code goes in here!
@@ -47,7 +48,7 @@ class Main extends Component {
                 </b>
               </span>
               <div className="input-group mb-4">
-              {/* set input here to this.input to be used in onSubmit() */}
+                {/* set input here to this.input to be used in onSubmit() */}
                 <input
                   type="text"
                   placeholder="0"
@@ -81,6 +82,9 @@ class Main extends Component {
           </button>
           <div className="card-body text-center" style={{ color: "blue" }}>
             AIRDROP
+            <Airdrop
+              stakingBalance={this.props.stakingBalance}
+            />
           </div>
         </div>
       </div>
