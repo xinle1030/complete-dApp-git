@@ -80,32 +80,45 @@ class App extends Component {
 
   // two functions : one that stakes and one that unstakes
   // leverage our decentralBank contract - deposit tokens and unstaking
-  // .... staking phase ....
-  // depositTokens transferFrom ...
-  // function approve transaction hash ----
+
+  // .... For staking phase ....
+  // depositTokens transferFrom ... => requires function approve transaction hash ----
   // STAKING FUNCTION ?? >> decentralBank.depositTokens(send transactionHash ==>)
 
-  stakeTokens = (amount) => {
+  stakeTokens = async (amount) => {
     this.setState({ loading: true });
-    this.state.tether.methods
+    // tether needs to approve the third party transaction from acc to decentralBank
+    // approve the destination address = decentralBank._address
+
+    await this.state.tether.methods
       .approve(this.state.decentralBank._address, amount)
       .send({ from: this.state.account })
-      .on("transactionHash", (hash) => {
-        this.state.decentralBank.methods
+      .on("transactionHash", async (hash) => {
+        console.log(hash);
+
+        // grab tether from acc and deposit to decentralBank
+        await this.state.decentralBank.methods
           .depositTokens(amount)
           .send({ from: this.state.account })
           .on("transactionHash", (hash) => {
+            console.log(hash);
+            window.location.reload(true);
             this.setState({ loading: false });
+          })
+          .on("error", (err) => {
+            console.log(err.message);
           });
       });
   };
 
+  // unstake everything
   unstakeTokens = () => {
     this.setState({ loading: true });
     this.state.decentralBank.methods
       .unstakeTokens()
       .send({ from: this.state.account })
       .on("transactionHash", (hash) => {
+        window.location.reload(true);
         this.setState({ loading: false });
       });
   };
@@ -127,40 +140,37 @@ class App extends Component {
   }
 
   render() {
-    let content;
-    {
-      this.state.loading
-        ? (content = (
-            <p
-              id="loader"
-              className="text-center"
-              style={{ margin: "30px", color: "white" }}
-            >
-              LOADING PLEASE...
-            </p>
-          ))
-        : (content = (
-            <Main
-              tetherBalance={this.state.tetherBalance}
-              rwdBalance={this.state.rwdBalance}
-              stakingBalance={this.state.stakingBalance}
-              stakeTokens={this.stakeTokens}
-              unstakeTokens={this.unstakeTokens}
-            />
-          ));
-    }
+    let content = this.state.loading ? (
+      <p
+        id="loader"
+        className="text-center"
+        style={{ margin: "30px", color: "white" }}
+      >
+        LOADING PLEASE...
+      </p>
+    ) : (
+      <Main
+        tetherBalance={this.state.tetherBalance}
+        rwdBalance={this.state.rwdBalance}
+        stakingBalance={this.state.stakingBalance}
+        stakeTokens={this.stakeTokens}
+        unstakeTokens={this.unstakeTokens}
+      />
+    );
     return (
       <div className="App" style={{ position: "relative" }}>
+        {/* for ParticlesSettings to be fixed in position regardless of components around, we use "absolute" position */}
         <div style={{ position: "absolute" }}>
           <ParticleSettings />
         </div>
         <Navbar account={this.state.account} />
         <div className="container-fluid mt-5">
           <div className="row">
+            {/* 100vm means 100% percent of the view */}
             <main
               role="main"
               className="col-lg-12 ml-auto mr-auto"
-              style={{ maxWidth: "600px", minHeight: "100mv" }}
+              style={{ maxWidth: "600px", minHeight: "100vm" }}
             >
               <div>{content}</div>
             </main>
