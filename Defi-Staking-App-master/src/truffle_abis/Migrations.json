@@ -74,7 +74,7 @@
   "sourceMap": "25:519:1:-;;;120:56;8:9:-1;5:2;;;30:1;27;20:12;5:2;120:56:1;159:10;151:5;;:18;;;;;;;;;;;;;;;;;;25:519;;;;;;",
   "deployedSourceMap": "25:519:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:519:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;367:175;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;367:175:1;;;;;;;;;;;;;;;;;;;:::i;:::-;;77:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;51:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;252:109;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;252:109:1;;;;;;;;;;;;;;;;;:::i;:::-;;367:175;231:5;;;;;;;;;;;217:19;;:10;:19;;;214:25;;;433:19;466:11;433:45;;488:8;:21;;;510:24;;488:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;488:47:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;488:47:1;;;;238:1;214:25;367:175;:::o;77:36::-;;;;:::o;51:20::-;;;;;;;;;;;;;:::o;252:109::-;231:5;;;;;;;;;;;217:19;;:10;:19;;;214:25;;;345:9;318:24;:36;;;;214:25;252:109;:::o",
   "source": "pragma solidity ^0.5.0;\n\ncontract Migrations {\n    address public owner;\n    uint public last_completed_migration;\n\n    constructor() public {\n        owner = msg.sender;\n    }\n\n    modifier restricted() {\n        if(msg.sender == owner) _;\n    }\n\n    function setCompleted(uint completed) public restricted {\n        last_completed_migration = completed;\n    }\n\n    function upgrade(address new_address) public restricted {\n        Migrations upgraded = Migrations(new_address);\n        upgraded.setCompleted(last_completed_migration);\n    }\n}",
-  "sourcePath": "D:\\Documents\\Online Courses\\Udemy\\Complete DApp - Solidity and React - Blockchain Development\\complete-dApp-git\\defi-staking-app\\Defi-Staking-App-master\\src\\contracts\\Migrations.sol",
+  "sourcePath": "D:\\Documents\\Online Courses\\Udemy\\Complete DApp - Solidity and React - Blockchain Development\\complete-dApp-git\\Defi-Staking-App-master\\src\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -1469,12 +1469,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x6AB2Db8556FE15a6123170A8037E5B517aB5551a",
-      "transactionHash": "0xf96f953845edc35c9f387a9140bd9e874639af3ff8cdaccdaab41dc7199d58e8"
+      "address": "0x1B95aE1C6325936dC7bfdbfD1D992e3eE57F103B",
+      "transactionHash": "0xaab8f31a9e1eb46bbce0c68d2314e2139bf5273f487d82c5749d048dc9ddd452"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-02-06T09:15:18.648Z",
+  "updatedAt": "2023-02-08T04:34:27.853Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
