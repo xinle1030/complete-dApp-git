@@ -14,6 +14,7 @@ class ParticleSettings extends Component {
                             value:'#0d47a1'
                         }, 
                     },
+                    // frames per second
                     fpsLimit:60,
                     interactivity:{
                         detect_on: 'canvas',
