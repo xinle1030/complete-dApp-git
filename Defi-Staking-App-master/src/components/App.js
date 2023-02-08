@@ -10,6 +10,7 @@ import ParticleSettings from "./ParticleSettings.js";
 
 // core component
 class App extends Component {
+
   // run the function before the rendering component
   async UNSAFE_componentWillMount() {
     await this.loadWeb3();
@@ -30,6 +31,7 @@ class App extends Component {
   async loadBlockchainData() {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
+    console.log(accounts);
     this.setState({ account: accounts[0] });
     const networkId = await web3.eth.net.getId();
 
